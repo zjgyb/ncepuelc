@@ -130,6 +130,7 @@ var personImg = document.getElementById('person-img');
 personLogo.onchange = function() {
     var imgFile = personLogo.files[0];
     if(imgFile) {
+        // 限制图片2M左右
         if(parseInt(imgFile.size / 1024) < 2000) {
             var fr = new FileReader();
             fr.readAsDataURL(imgFile);

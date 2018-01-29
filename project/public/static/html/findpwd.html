@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户登录</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="../css/reset.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+    <style>
+        @media only screen and (max-width: 479px) {
+            .form-horizontal .form-group {
+                padding: 0 25px;
+            }
+            .form-horizontal .form-group i {
+                left: 45px;
+            }
+            .form-horizontal .btn {
+                padding: 30px 25px;
+            }
+            .forgetdwd {
+                padding-right: 30px;
+            }
+            .form-verfction img {
+                width: 30%;
+            }
+        }
+
+        @media only screen and (max-width: 360px) {
+            .form-horizontal .btn {
+                padding: 10px 20px;
+            }
+            .form-verfction img {
+                width: 35%;
+            }
+        }
+        .form-verfction span {
+            position: absolute;
+            top: 50px;
+        }
+    </style>
+    <script src="../js/main.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 login-content" id="find-pwd">
+                <form class="form-horizontal find_psd" id="form-pwd">
+                    <span class="heading">找回密码</span>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="电子邮件">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span class="sr-only"></span>
+                    </div>
+                    <div class="form-group form-verfction">
+                        <input type="text" class="form-control sign-verfction" name="fi_verfction" placeholder="验证码" onclick="this.src=this.src+'?'+Math.random()">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span class="sr-only"></span>
+                        <img src="{:captcha_src()}" alt="验证码" width="20%" height="40" />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" id="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <footer>华北电力大学电力工程系教师招聘网站</footer>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/findpwd.js"></script>
+</body>
+
+</html>
