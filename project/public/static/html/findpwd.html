@@ -58,12 +58,12 @@
                 <form class="form-horizontal find_psd" id="form-pwd">
                     <span class="heading">找回密码</span>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="电子邮件">
+                        <input type="email" class="form-control" name="email" placeholder="电子邮件" autofocus>
                         <i class="glyphicon glyphicon-user"></i>
                         <span class="sr-only"></span>
                     </div>
                     <div class="form-group form-verfction">
-                        <input type="text" class="form-control sign-verfction" name="fi_verfction" placeholder="验证码" onclick="this.src=this.src+'?'+Math.random()">
+                        <input type="text" class="form-control sign-verfction" name="register" placeholder="验证码" onclick="this.src=this.src+'?'+Math.random()">
                         <i class="glyphicon glyphicon-edit"></i>
                         <span class="sr-only"></span>
                         <img src="{:captcha_src()}" alt="验证码" width="20%" height="40" />
@@ -72,7 +72,6 @@
                         <button type="button" class="btn btn-default" id="submit">提交</button>
                     </div>
                 </form>
-            </div>
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@ function verifyForm(element) {
                 var prevIndex = valuesIndex.substr(0, index - 1).length;
                 var nextIndex = valuesIndex.substr(index + 1).length;
                 if (search == -1 || prevIndex == 0 || nextIndex == 0) {
-                    elementThis.nextElementSibling.innerHTML = '缺少@,请填写正确的邮箱地址';
+                    elementThis.nextElementSibling.innerHTML = '请填写正确的邮箱地址';
                     elementThis.nextElementSibling.className = '';
                 }
             }        
