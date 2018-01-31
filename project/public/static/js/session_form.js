@@ -565,7 +565,7 @@ function addVerifyForm(_this, main, num) {
             var value = _this.value;
             $(_this).next()[0].className = 'sr-only';
             var datas = JSON.parse(sessionStorage.getItem(main));
-            if (datas[num][name]) {
+            if (datas[num]) {
                 datas[num][name] = value;
                 var str = JSON.stringify(datas);
                 sessionStorage.setItem(main, str);
