@@ -58,24 +58,142 @@ selectOption(1960, 2020, prizeDate);
 clickAddBlur('patent-btn', 'main-patent');
 
 
-// 接收
+// 接收后台传过来的数据
+
+$.get('', function(data) {
+    // 基本信息部分
+    var datas = data.font;
+    var img = data.img;
+    var information = [
+        "pc-main-infor",
+        "pc-main-teach",
+        "pc-main-study",
+        "pc-main-intro",
+        "main-project",
+        "main-article",
+        "main-prize",
+        "main-patent"
+    ];
+
+    for (var i = 0; i < information.length; i++) {
+        sessionStorage.setItem(information[i], datas[information[i]]);
+        // datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
+    }
+
+    var getImg = document.getElementById('person-img');
+    getImg.src = img;
+
+    
+    // for(var i = 0; i < addInformation[i].length; i++) {
+    //     sessionStorage.setItem(information[i], datas[information[i]]);
+    // }
+
+    // 基本信息保存 id:pc-main-infor
+
+    // 基本信息
+    save('pc-main-infor');
+
+    // 学位学历
+    save('pc-main-teach');
+
+    // 个人学习状况
+    save('pc-main-study');
+
+    // 个人介绍
+    save('pc-main-intro');
+
+
+    saveAdd('main-project');
+
+    // 著作
+    saveAdd('main-article');
+
+    // 获奖情况
+    saveAdd('main-prize');
+
+    // 重要发明
+    saveAdd('main-patent');
+
+    // 删除，垃圾箱按钮
+    deleteAdd('main-project');
+
+    // 关于提交
+
+    var submit = document.getElementById('submit');
+    submit.onclick = function () {
+        var input = document.getElementsByTagName('input');
+        var n = 0;
+        for (var i = 0; i < input.length; i++) {
+            var srOnly = $(input[i]).next()[0].className;
+            if (input[i].value && srOnly == 'sr-only') {
+                n++;
+                if (input[i].name == 'cell-phone') {
+                    var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/g;
+                    if (!myreg.test(input[i].value)) {
+                        $(input[i]).next()[0].innerHTML = '*请填写正确的手机号码';
+                        $(input[i]).next()[0].className = '';
+                        n--;
+                    }
+                }
+                if (input[i].name == 'email') {
+                    var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                    if (!myreg.test(input[i].value)) {
+                        $(input[i]).next()[0].innerHTML = '*请填写正确的邮箱格式';
+                        $(input[i]).next()[0].className = '';
+                        n--;
+                    }
+                }
+            } else if (input[i].type == 'file') {
+                if (imgData) {
+                    n++;
+                    // console.log(imgData);
+                }
+            }
+        }
+        if (n == input.length) {
+            // 传数据 利用id提取出sessionStorage
+            var information = [
+                "pc-main-infor",
+                "pc-main-teach",
+                "pc-main-study",
+                "pc-main-intro",
+                "main-project",
+                "main-article",
+                "main-prize",
+                "main-patent"
+            ];
+            var datas = {};
+            for (var i = 0; i < information.length; i++) {
+                datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
+            }
+            // console.log(datas);
+            $.ajax({
+                type: 'post',
+                url: '',
+                dataType: "json",
+                data: {
+                    font: datas,
+                    img: imgData
+                },
+                success: function (data) {
+                    if (data.status) {
+                        alert('提交成功');
+                    } else {
+                        alert('发生错误' + data.content);
+                    }
+                },
+                error: function (jqXHR) {
+                    alert("发生错误：" + jqXHR.status);
+                }
+            });
+        } else {
+            alert('你还没有填完！');
+        }
+    }
+});
 
 
 
-
-// 基本信息保存 id:pc-main-infor
-
-// 基本信息
-save('pc-main-infor');
-
-// 学位学历
-save('pc-main-teach');
-
-// 个人学习状况
-save('pc-main-study');
-
-// 个人介绍
-save('pc-main-intro');
 
 function save(ele) {
     if (!sessionStorage.getItem(ele)) {
@@ -343,16 +461,6 @@ function selectBlur(_this, main, num) {
 // }
 // 从主持的项目开始为新增项
 
-saveAdd('main-project');
-
-// 著作
-saveAdd('main-article');
-
-// 获奖情况
-saveAdd('main-prize');
-
-// 重要发明
-saveAdd('main-patent');
 function saveAdd(ele, bool) {
 
 
@@ -576,8 +684,7 @@ function addVerifyForm(_this, main, num) {
 
 }
 
-// 删除，垃圾箱按钮
-deleteAdd('main-project');
+
 function deleteAdd(ele) {
     var obj = document.getElementById(ele);
     var spanBtn = $(obj).children('.row');
@@ -612,76 +719,3 @@ function deleteAdd(ele) {
     }
 }
 
-// 关于提交
-
-var submit = document.getElementById('submit');
-submit.onclick = function () {
-    var input = document.getElementsByTagName('input');
-    var n = 0;
-    for (var i = 0; i < input.length; i++) {
-        var srOnly = $(input[i]).next()[0].className;
-        if (input[i].value && srOnly == 'sr-only') {
-            n++;
-            if (input[i].name == 'cell-phone') {
-                var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/g;
-                if (!myreg.test(input[i].value)) {
-                    $(input[i]).next()[0].innerHTML = '*请填写正确的手机号码';
-                    $(input[i]).next()[0].className = '';
-                    n--;
-                }
-            }
-            if (input[i].name == 'email') {
-                var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-                if (!myreg.test(input[i].value)) {
-                    $(input[i]).next()[0].innerHTML = '*请填写正确的邮箱格式';
-                    $(input[i]).next()[0].className = '';
-                    n--;
-                }
-            }
-        } else if (input[i].type == 'file') {
-            if (imgData) {
-                n++;
-                // console.log(imgData);
-            }
-        }
-    }
-    if (n == input.length) {
-        // 传数据 利用id提取出sessionStorage
-        var information = [
-            "pc-main-infor",
-            "pc-main-teach",
-            "pc-main-study",
-            "pc-main-intro",
-            "main-project",
-            "main-article",
-            "main-prize",
-            "main-patent"
-        ];
-        var datas = {};
-        for (var i = 0; i < information.length; i++) {
-            datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
-        }
-        // console.log(datas);
-        $.ajax({
-            type: 'post',
-            url: '',
-            dataType: "json",
-            data: {
-                font: datas,
-                img: imgData
-            },
-            success: function (data) {
-                if (data.status) {
-                    alert('提交成功');
-                } else {
-                    alert('发生错误' + data.content);
-                }
-            },
-            error: function (jqXHR) {
-                alert("发生错误：" + jqXHR.status);
-            }
-        });
-    } else {
-        alert('你还没有填完！');
-    }
-}
