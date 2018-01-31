@@ -9,6 +9,12 @@
     border-radius: 15px;
 }
 
+@media screen and (min-width: 768px) {
+    .row .user-content {
+        display: none;
+    }
+}
+
 .user-content img {
     display: inline-block;
     width: 130px;

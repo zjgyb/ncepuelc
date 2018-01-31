@@ -78,10 +78,10 @@ function onBures(ele) {
                     var regNum = /^[0-9]+$/;
                     // var re = new RegExp(regu); 
                     if (!reg.test(this.value) || regEn.test(this.value) || regNum.test(this.value)) {
-                        $(this).next().next()[0].innerHTML = '请输入6-16位且是数字、字母、下划线';
+                        $(this).next().next()[0].innerHTML = '请输入6-16位且不能全数字或英文';
                         $(this).next().next()[0].className = '';
                     } else {
-                        console.log($(this).attr('name'));
+                        // console.log($(this).attr('name'));
                         if ($(this).attr('name') == 'register') {
                             var pwdPrev = $('form input[type=password]')[0].value;
                             console.log(1);
