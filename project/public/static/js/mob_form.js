@@ -23,7 +23,18 @@ function mainBtn(btn) {
                     obj[j].className = 'sr-only';
                     n++;
                 } else {
-                    obj[j].className = '';
+                    
+                    if($(obj[j]).prev()[0].type == 'file') {
+                        // console.log($(obj[j]).next().next()[0].value)
+                        if(imgData) {
+                            n++;
+                            // console.log($(obj[j]).next().next()[0].value);
+                        } else {
+                            obj[j].className = '';
+                        }     
+                    }  else {
+                        obj[j].className = '';
+                    }
                 }
             }
             leng += obj.length;

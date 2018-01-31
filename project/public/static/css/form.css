@@ -98,6 +98,11 @@ body {
     min-height: 78px;
 }
 
+.pc .pc-main-study .form-group,
+.pc .pc-main-intro .form-group {
+    min-height: 150px;
+}
+
 .pc .form-group p {
     color: red;
     font-size: 12px;

@@ -222,8 +222,9 @@ save('pc-main-intro');
  // 失去焦点
 
  function verifyForm(_this, main) {
-    //  console.log(_this.type);
-    if(_this.type == 'text' || _this.type == 'texterea') {
+     console.log(_this.type );
+    if(_this.type == 'text' || _this.type == 'textarea') {
+        // console.log(_this.type == 'texterea')
         if (!_this.value) {
             $(_this).next()[0].innerHTML = '*未填写';
             $(_this).next()[0].className = '';
@@ -636,8 +637,9 @@ submit.onclick = function() {
     var input = document.getElementsByTagName('input');
     var n = 0;
     for(var i = 0; i < input.length; i++) {
-        var srOnly = $(input[i]).next()[0].className;
-        if(input[i].value && srOnly == 'sr-only') {
+       
+        if(input[i].value) {
+            $(input[i]).next()[0].className = 'sr-only';
             n++;
            if(input[i].name == 'cell-phone') {
                var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/g;
@@ -655,12 +657,17 @@ submit.onclick = function() {
                    n--;
                }
            }
+           
         } else if(input[i].type == 'file') {
             if (imgData) {
                 n++;
                 // console.log(imgData);
             }
         }
+        // var srOnly = $(input[i]).next()[0].className;
+        // if(srOnly != 'sr-only') {
+        //     n--;
+        // }
     }
     if(n == input.length) {
         // 传数据 利用id提取出sessionStorage
