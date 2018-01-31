@@ -116,7 +116,9 @@ $.get('', function(data) {
 
     // 删除，垃圾箱按钮
     deleteAdd('main-project');
-
+    deleteAdd('main-article');
+    deleteAdd('main-prize');
+    deleteAdd('main-patent');
     // 关于提交
 
     var submit = document.getElementById('submit');
