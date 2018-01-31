@@ -223,14 +223,20 @@ save('pc-main-intro');
     //  console.log(_this.type);
     if(_this.type == 'text' || _this.type == 'texterea') {
         if (!_this.value) {
+            $(_this).next()[0].innerHTML = '*未填写';
             $(_this).next()[0].className = '';
         } else {
             $(_this).next()[0].className = 'sr-only';
         }
 
         if(_this.name == 'cell-phone') {
-            var myreg = /^[0-9]{11}/g;
-            console.log(myreg.test(_this.value));
+            var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/g;
+            if(!myreg.test(_this.value)) {
+                $(_this).next()[0].innerHTML = '*请填写正确的手机号码';
+                $(_this).next()[0].className = ''
+            } else {
+                $(_this).next()[0].className = 'sr-only';
+            }
         }
         var name = _this.name;
         var value = _this.value;
@@ -612,6 +618,22 @@ submit.onclick = function() {
         var srOnly = $(input[i]).next()[0].className;
         if(input[i].value && srOnly == 'sr-only') {
             n++;
+           if(input[i].name == 'cell-phone') {
+               var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/g;
+               if (!myreg.test(input[i].value)) {
+                   $(input[i]).next()[0].innerHTML = '*请填写正确的手机号码';
+                   $(input[i]).next()[0].className = '';
+                   n--;
+               }
+           }
+           if(input[i].name == 'email') {
+               var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+               if (!myreg.test(input[i].value)) {
+                   $(input[i]).next()[0].innerHTML = '*请填写正确的邮箱格式';
+                   $(input[i]).next()[0].className = '';
+                   n--;
+               }
+           }
         } else if(input[i].type == 'file') {
             if (imgData) {
                 n++;
@@ -620,7 +642,41 @@ submit.onclick = function() {
         }
     }
     if(n == input.length) {
-        console.log(1);
+        // 传数据 利用id提取出sessionStorage
+        var information = [
+            "pc-main-infor",
+            "pc-main-teach",
+            "pc-main-study",
+            "pc-main-intro",
+            "main-project",
+            "main-article",
+            "main-prize",
+            "main-patent"
+        ];
+         var datas = {};
+        for(var i = 0; i < information.length; i++) {          
+            datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
+        }
+        // console.log(datas);
+        $.ajax({
+           type: 'post',
+           url: '',
+           dataType: "json",
+           data: {
+               font: datas,
+               img : imgData
+           },
+           success: function (data) {
+            if(data.status) {
+                alert('提交成功');
+            } else {
+                alert('发生错误' + data.content);
+            }
+           },
+           error: function (jqXHR) {
+               alert("发生错误：" + jqXHR.status);
+           }
+        });
     } else {
         alert('你还没有填完！');
     }
