@@ -184,6 +184,29 @@ body {
     padding: 0;
 }
 
+.pc-content .row>h4 {
+    margin-left: 15px; 
+    position: relative;
+}
+
+.pc-content .row>span {
+    float: right;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.pc-maincon .row>h4:before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+    left: -32px;
+    background-color: #fff;
+    border: 1px solid #aeaeae;
+}
+
 .pc-content .submit {
     position: relative;
 }
@@ -205,6 +228,7 @@ footer {
 }
 
 /* 移动端 */
+
 .ca-next-button,
 .pro-next-button,
 .art-next-button,

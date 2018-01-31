@@ -129,6 +129,8 @@ var personLogo = document.getElementById('person-logo');
 var personImg = document.getElementById('person-img');
 personLogo.onchange = function() {
     var imgFile = personLogo.files[0];
+    // var _this = this;
+    // console.log(this.value)
     if(imgFile) {
         // 限制图片2M左右
         if(parseInt(imgFile.size / 1024) < 2000) {
@@ -150,7 +152,8 @@ personLogo.onchange = function() {
                         // img.src = fr.result;
                         personImg.src = fr.result;
                         imgData = imgFile;
-                        console.log(imgFile);
+                        // sessionStorage.setItem(_this.name, fr.result);
+                        // console.log(imgFile);
                     }
                     // personImg.src = fr.result;
                     /* fr.onload = function () {
