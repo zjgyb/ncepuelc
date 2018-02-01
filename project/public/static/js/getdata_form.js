@@ -344,8 +344,9 @@ function save(ele) {
 // 失去焦点
 
 function verifyForm(_this, main) {
-    //  console.log(_this.type);
-    if (_this.type == 'text' || _this.type == 'texterea') {
+    console.log(_this.type);
+    if (_this.type == 'text' || _this.type == 'textarea') {
+        // console.log(_this.type == 'texterea')
         if (!_this.value) {
             $(_this).next()[0].innerHTML = '*未填写';
             $(_this).next()[0].className = '';
@@ -435,6 +436,8 @@ function selectBlur(_this, main, num) {
     sessionStorage.setItem(main, str);
 
 }
+
+
 // sessionStorage['pc-main-infor'].name;
 // console.log(JSON.parse(sessionStorage.getItem('pc-main-infor'))['name']);
 // console.log(sessionStorage['pc-main-infor']);
@@ -477,7 +480,11 @@ function saveAdd(ele, bool) {
                 var dataIn = JSON.parse(sessionStorage.getItem(ele));
                 if (dataIn[num][name]) {
                     obj[n].value = dataIn[num][name];
-                }
+                } /* else {
+                    dataIn[num][name] = obj[n].value;
+                    var strIn = JSON.stringify(data);
+                    sessionStorage.setItem(ele, strIn);
+                } */
                 // dataIn[num][name] = value;
 
                 // var datas = {};
@@ -520,10 +527,11 @@ function saveAdd(ele, bool) {
                         selectBlur(this, ele, num);
                     }
                 }
-                if (dataIn[num]) {
+                if (dataIn[num][name]) {
                     var values = dataIn[num][name];
                     //  console.log(values.substring(0, 4));
                     var a = 4;
+                    // console.log(values);
                     for (var n = 0; n < obj.length; n++) {
                         var values = dataIn[num][name];
                         switch (n) {
@@ -551,8 +559,9 @@ function saveAdd(ele, bool) {
                 var name = obj[0].name;
 
                 var dataIn = JSON.parse(sessionStorage.getItem(ele));
-                if (data[num][name]) {
-                    obj[0].value = data[num][name];
+
+                if (dataIn[num][name]) {
+                    obj[0].value = dataIn[num][name];
                 } else {
                     value = obj[0].value;
                     dataIn[num][name] = value;
@@ -671,9 +680,12 @@ function addVerifyForm(_this, main, num) {
             var value = _this.value;
             $(_this).next()[0].className = 'sr-only';
             var datas = JSON.parse(sessionStorage.getItem(main));
-            datas[num][name] = value;
-            var str = JSON.stringify(datas);
-            sessionStorage.setItem(main, str);
+            if (datas[num]) {
+                datas[num][name] = value;
+                var str = JSON.stringify(datas);
+                sessionStorage.setItem(main, str);
+            }
+
         }
     } else {
         var name = _this.name;
@@ -686,37 +698,42 @@ function addVerifyForm(_this, main, num) {
 
 }
 
-
 function deleteAdd(ele) {
     var obj = document.getElementById(ele);
     var spanBtn = $(obj).children('.row');
     for (var i = 0; i < spanBtn.length - 1; i++) {
         var btn = $(spanBtn[i]).children('span')[0];
         btn.onclick = function () {
-            var index = $(this).parent().index();
-            var data = JSON.parse(sessionStorage.getItem(ele));
-            var project = [
-                "一",
-                "二",
-                "三",
-                "四",
-                "五"
-            ];
-            delete data[index];
-            var n = 0;
-            var datas = {};
-            for (var num in data) {
-                datas[n] = data[num];
-                n++;
+            var len = $(obj).children('.row').length;
+            // console.log(len)
+            if (len > 2) {
+                var index = $(this).parent().index();
+                var data = JSON.parse(sessionStorage.getItem(ele));
+                var project = [
+                    "一",
+                    "二",
+                    "三",
+                    "四",
+                    "五"
+                ];
+                delete data[index];
+                var n = 0;
+                var datas = {};
+                for (var num in data) {
+                    datas[n] = data[num];
+                    n++;
+                }
+                // console.log(datas);
+                var str = JSON.stringify(datas);
+                sessionStorage.setItem(ele, str);
+                $(this).parent()[0].remove();
+                var row = $(obj).find('.row');
+                for (var j = 0; j < row.length - 1; j++) {
+                    $(row[j]).children('h4')[0].innerHTML = '项目' + project[j];
+                }
+                // saveAdd(ele);
             }
-            // console.log(datas);
-            var str = JSON.stringify(datas);
-            sessionStorage.setItem(ele, str);
-            $(this).parent()[0].remove();
-            var row = $(obj).find('.row');
-            for (var j = 0; j < row.length - 1; j++) {
-                $(row[j]).children('h4')[0].innerHTML = '项目' + project[j];
-            }
+
         }
     }
 }

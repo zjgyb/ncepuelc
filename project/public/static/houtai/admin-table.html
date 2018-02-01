@@ -22,84 +22,83 @@
 <![endif]-->
 
 <header class="am-topbar admin-header">
-  <div class="am-topbar-brand">
-    <img style="height: 80%" src="assets/i/logo.png">
-    <small>电力系教师招聘管理后台</small>
-  </div>
+	<div class="am-topbar-brand">
+		<img style="height: 80%" src="assets/i/logo.png">
+		<small>电力系教师招聘管理后台</small>
+	</div>
 
-  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
-    <span class="am-sr-only">导航切换</span>
-    <span class="am-icon-bars"></span>
-  </button>
+	<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
+		<span class="am-sr-only">导航切换</span>
+		<span class="am-icon-bars"></span>
+	</button>
 
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+  	<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
-    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-     <li>
-       <a href="javascript:;">
-        <span class="am-icon-power-off"></span>退出
-      </a>
-    </li>
-     <!-- <li class="am-dropdown" data-am-dropdown>
-       <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-         <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
-       </a>
-       <ul class="am-dropdown-content">
-         <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
-         <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-         <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
-       </ul>
-     </li>
-     <li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>-->
-   </ul> 
-  </div>
+		<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+			<li>
+			<a href="javascript:;">
+				<span class="am-icon-power-off"></span>退出
+			</a>
+			</li>
+		</ul> 
+	</div>
 </header>
 
 <div class="am-cf admin-main">
   <!-- content start -->
   	<div class="admin-content">
 		<div class="am-g">
-		<div class="am-u-md-6 am-cf">
-			<div class="am-fl am-cf">
-			<div class="am-btn-toolbar am-fl">
-				<div class="am-btn-group am-btn-group-xs">
-				<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 导出全部报名表</button>
-				<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 导出选中报名表</button>
-				</div>
+			<div class="am-u-md-6 am-cf">
+				<div class="am-fl am-cf">
+					<div class="am-btn-toolbar am-fl">
+						<div class="am-btn-group am-btn-group-xs">
+							<button type="button" class="am-btn am-btn-default" id="getAll">
+								<span class="am-icon-save"></span>
+								<a href="#">导出全部报名表</a>
+							</button>
+							<button type="button" class="am-btn am-btn-default" id="getPart">
+								<span class="am-icon-save"></span> 
+								<a href="#">导出选中报名表</a>
+							</button>
+						</div>
 
-				<!-- <div class="am-form-group am-margin-left am-fl">
-				<select>
-					<option value="option1">所有类别</option>
-					<option value="option2">IT业界</option>
-					<option value="option3">数码产品</option>
-					<option value="option3">笔记本电脑</option>
-					<option value="option3">平板电脑</option>
-					<option value="option3">只能手机</option>
-					<option value="option3">超极本</option>
-				</select>
-				</div> -->
+						<!-- <div class="am-form-group am-margin-left am-fl">
+						<select>
+							<option value="option1">所有类别</option>
+							<option value="option2">IT业界</option>
+							<option value="option3">数码产品</option>
+							<option value="option3">笔记本电脑</option>
+							<option value="option3">平板电脑</option>
+							<option value="option3">只能手机</option>
+							<option value="option3">超极本</option>
+						</select>
+						</div> -->
+					</div>
+				</div>
 			</div>
+			<div class="am-u-md-3 am-cf">
+				<div class="am-fr">
+					<div class="am-input-group am-input-group-sm">
+						<input type="text" class="am-form-field" id="content">
+							<span class="am-input-group-btn">
+							<button class="am-btn am-btn-default" type="button" id="search">
+								搜索
+							</button>
+							</span>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="am-u-md-3 am-cf">
-			<div class="am-fr">
-			<div class="am-input-group am-input-group-sm">
-				<input type="text" class="am-form-field">
-					<span class="am-input-group-btn">
-					<button class="am-btn am-btn-default" type="button">搜索</button>
-					</span>
-			</div>
-			</div>
-		</div>
 		</div>
 		<div class="am-g">
 			<div class="am-u-sm-12">
 				<form class="am-form">
-					<table class="am-table am-table-striped am-table-hover table-main">
+					<table class="am-table am-table-striped am-table-hover table-main" id="table">
 						<thead>
 							<tr>
-								<th class="table-check"><input type="checkbox" />
-								</th><th>ID</th>
+								<th class="table-check">
+									<input type="checkbox" />
+								</th>
+								<th>ID</th>
 								<th>姓名</th>
 								<th>性别</th>
 								<th>出生年月</th>
@@ -117,7 +116,7 @@
 							<tr>
 								<td><input type="checkbox" /></td>
 								<td>1</td>
-								<td><a href="#">龚意邦</a></td>
+								<td><a href="#"></a></td>
 								<td>男</td>
 								<td>1998-1-1</td>
 								<td>中国共产党</td>
@@ -137,19 +136,47 @@
 									</div>
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<input type="checkbox" />
+								</td>
+								<td>2</td>
+								<td>
+									<a href="#"></a>
+								</td>
+								<td>男</td>
+								<td>1998-1-1</td>
+								<td>中国共产党</td>
+								<td>博士</td>
+								<td>华北电力大学（保定）</td>
+								<td>电力工程</td>
+								<td>电力信息及其自动化</td>
+								<td>青年学者、千人计划</td>
+								<td>电磁什么什么团队</td>
+								<td>
+									<div class="am-btn-toolbar">
+										<div class="am-btn-group am-btn-group-xs">
+											<button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+												<span class="am-icon-pencil-square-o"></span>
+												 <a href="#">查看</a>
+											</button>
+										</div>
+									</div>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 					<div class="am-cf">
 						<div id="dataNumber">共 15 条记录</div>
 						<div class="am-fr">
 							<ul class="am-pagination">
-							<li class="am-disabled"><a href="#">«</a></li>
-							<li class="am-active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">»</a></li>
+								<li class="am-disabled"><a href="#">«</a></li>
+								<li class="am-active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">»</a></li>
 							</ul>
 						</div>
 					</div>
@@ -179,5 +206,6 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script src="assets/js/app.js"></script>
+<script src="assets/js/table.js"></script>
 </body>
 </html>
