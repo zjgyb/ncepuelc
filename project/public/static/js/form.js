@@ -1,6 +1,7 @@
 // 基本信息
 // 出生时间
 // 保存图片的数据;
+
 var imgData;
 
 var year = document.getElementById('year');

@@ -72,6 +72,7 @@ save('pc-main-study');
 save('pc-main-intro');
 
 function save(ele) {
+    console.log(ele);
     if (!sessionStorage.getItem(ele)) {
         sessionStorage.setItem(ele, '{}');
     }
