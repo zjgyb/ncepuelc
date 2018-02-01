@@ -7,7 +7,7 @@ $.ajax({
         if (data.status) {
             $('#use-content img')[0].src = data.src;
             $('#user-name')[0].innerHTML = data.user;
-            $('#user-success')[0].innerHTML = data.content;
+            // $('#user-success')[0].innerHTML = data.content;
             $('#download').find('a')[0].href = data.downloadsrc;
             $('#alter').find('a')[0].href = data.altersrc;
         } else {
