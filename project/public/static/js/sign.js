@@ -73,18 +73,19 @@ function onBures(ele) {
                 }
             } else if ($(this).attr('type') == 'password') {
                 if (this.value) {
-                    var reg = /^\w{6,16}$/;
+                    var reg = /^.{6,16}$/;
                     var regEn = /^[a-zA-Z]+$/; 
                     var regNum = /^[0-9]+$/;
+                    var regChinese = /[\u4e00-\u9fa5]/gm;
                     // var re = new RegExp(regu); 
-                    if (!reg.test(this.value) || regEn.test(this.value) || regNum.test(this.value)) {
+                    if (!reg.test(this.value) || regEn.test(this.value) || regNum.test(this.value) || regChinese.test(this.value)) {
                         $(this).next().next()[0].innerHTML = '请输入6-16位且不能全数字或英文';
                         $(this).next().next()[0].className = '';
                     } else {
                         // console.log($(this).attr('name'));
                         if ($(this).attr('name') == 'register') {
                             var pwdPrev = $('form input[type=password]')[0].value;
-                            console.log(1);
+                            // console.log(1);
                             if(pwdPrev != this.value) {
                                 $(this).next().next()[0].innerHTML = '两次密码不一致';
                                 $(this).next().next()[0].className = '';

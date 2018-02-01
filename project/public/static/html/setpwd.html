@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>忘记密码</title>
+    <title>设置新密码</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -40,30 +40,30 @@
                 width: 35%;
             }
         }
+
         .form-verfction span {
             position: absolute;
             top: 50px;
         }
     </style>
-    <script src="../js/main.js"></script>
+    <!-- <script src="../js/main.js"></script> -->
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-offset-3 col-md-6 login-content" id="find-pwd">
+            <div class="col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6 login-content" id="set-pwd">
                 <form class="form-horizontal find_psd" id="form-pwd">
-                    <span class="heading">找回密码</span>
+                    <span class="heading">设置新密码</span>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="电子邮件" autofocus>
-                        <i class="glyphicon glyphicon-user"></i>
+                        <input type="password" class="form-control" name="password" placeholder="新密码" autofocus>
+                        <i class="glyphicon glyphicon-lock"></i>
                         <span class="sr-only"></span>
                     </div>
-                    <div class="form-group form-verfction">
-                        <input type="text" class="form-control sign-verfction" name="register" placeholder="验证码">
-                        <i class="glyphicon glyphicon-edit"></i>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="register" placeholder="确认新密码">
+                        <i class="glyphicon glyphicon-lock"></i>
                         <span class="sr-only"></span>
-                        <img src="{:captcha_src()}" alt="验证码" width="35%" height="40" onclick="this.src=this.src+'?'+Math.random()"/>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-default" id="submit">提交</button>
@@ -74,7 +74,7 @@
     </div>
     <footer>华北电力大学电力工程系教师招聘网站</footer>
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../js/findpwd.js"></script>
+    <script src="../js/setpwd.js"></script>
 </body>
 
 </html>
