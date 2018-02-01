@@ -168,6 +168,8 @@ $.get('', function(data) {
             for (var i = 0; i < information.length; i++) {
                 datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
             }
+            var formData = new FormData();
+            formData.append('file', imgData);
             // console.log(datas);
             $.ajax({
                 type: 'post',
@@ -175,7 +177,7 @@ $.get('', function(data) {
                 dataType: "json",
                 data: {
                     font: datas,
-                    img: imgData
+                    img: formData
                 },
                 success: function (data) {
                     if (data.status) {

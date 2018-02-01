@@ -55,13 +55,12 @@ submit.onclick = function() {
             }
         }
     }
-    // console.log(n);
     if(n == len) {
         $.ajax({
             type: 'post',
             url: '',
             dataType: 'json',
-            data: inputAll[0],
+            data: inputAll[0].value,
             success: function(data) {
                 if(data.status) {
                     alert('修改成功');

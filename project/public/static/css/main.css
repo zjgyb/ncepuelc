@@ -185,12 +185,7 @@ body {
     float: right;
     cursor: pointer;
 }
-/* 注册 start 
-#sign-in,
-#find-pwd {
-    display: none;
-}
-*/
+
 .form-verfction {
     display: flex;
     position: relative;
@@ -202,14 +197,16 @@ body {
     margin-left: 8px;
     font-size: 14px;
 }
+
 .form-group input.sign-verfction {
     width: 50%;
 }
+
 .form-verfction img {
     position: absolute;
     right: 45px;
 }
-/* 注册 end */
+
 footer {
     text-align: center;
     color: #fff;

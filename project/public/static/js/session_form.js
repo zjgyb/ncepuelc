@@ -686,14 +686,15 @@ submit.onclick = function() {
         for(var i = 0; i < information.length; i++) {          
             datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
         }
-        // console.log(datas);
+        var formData = new FormData();
+        formData.append('file', imgData);
         $.ajax({
            type: 'post',
            url: '',
            dataType: "json",
            data: {
                font: datas,
-               img : imgData
+               img : formData
            },
            success: function (data) {
             if(data.status) {
