@@ -76,7 +76,7 @@ save('pc-main-study');
 save('pc-main-intro');
 
  function save(ele) {
-     console.log(ele);
+    //  console.log(ele);
      if(!sessionStorage.getItem(ele)) {
          sessionStorage.setItem(ele, '{}');
      }
@@ -223,7 +223,7 @@ save('pc-main-intro');
  // 失去焦点
 
  function verifyForm(_this, main) {
-     console.log(_this.type );
+    //  console.log(_this.type );
     if(_this.type == 'text' || _this.type == 'textarea') {
         // console.log(_this.type == 'texterea')
         if (!_this.value) {
@@ -689,13 +689,21 @@ submit.onclick = function() {
         var formData = new FormData();
         formData.append('file', imgData);
         $.ajax({
+            url: '',
+            type: 'POST',
+            async: false,
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (res) {
+        }).fail(function (res) { });
+        // console.log(formData);
+        $.ajax({
            type: 'post',
            url: '',
            dataType: "json",
-           data: {
-               font: datas,
-               img : formData
-           },
+           data: datas,
            success: function (data) {
             if(data.status) {
                 alert('提交成功');

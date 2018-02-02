@@ -170,15 +170,22 @@ $.get('', function(data) {
             }
             var formData = new FormData();
             formData.append('file', imgData);
-            // console.log(datas);
+            $.ajax({
+                url: '',
+                type: 'POST',
+                async: false,
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(function (res) {
+            }).fail(function (res) { });
+            // console.log(formData);
             $.ajax({
                 type: 'post',
                 url: '',
                 dataType: "json",
-                data: {
-                    font: datas,
-                    img: formData
-                },
+                data: datas,
                 success: function (data) {
                     if (data.status) {
                         alert('提交成功');
