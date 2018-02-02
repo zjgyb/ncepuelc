@@ -25,10 +25,8 @@ function mainBtn(btn) {
                 } else {
                     
                     if($(obj[j]).prev()[0].type == 'file') {
-                        // console.log($(obj[j]).next().next()[0].value)
                         if(imgData) {
                             n++;
-                            // console.log($(obj[j]).next().next()[0].value);
                         } else {
                             obj[j].className = '';
                         }     
@@ -49,7 +47,7 @@ function mainBtn(btn) {
             
         }
         if(leng == num) {
-            for(var i = 0; i <sib.length; i++) {
+            for(var i = 0; i < sib.length; i++) {
                 sib[i].style.display = 'none';
             }
             $(this).parent().hide();
@@ -57,7 +55,7 @@ function mainBtn(btn) {
             $(this).parent().next().next()[0].style.display = 'block';
             $(this).parent().next().next().next()[0].style.display = 'flex';   
         } else {
-            alert('你还未填写完');
+            alert('你还未填写完或者填写不正确！');
         }
            
     }
@@ -86,79 +84,3 @@ function prevBtn(btn, btnPar) {
         $(btnpar).next().next().next()[0].style.display = 'none';
     }
 }
-
-// 暂时没想到怎么处理 数字
-/* nextBtn('ca-btn-next', "main-project", 'pro-next-button', 5);
-nextBtn('pro-btn-next', "main-article", 'art-next-button', 6);
-nextBtn('art-btn-next', "main-prize", 'pri-next-button', 7);
-nextBtn('pri-btn-next', "main-patent", 'submit', 8);
-
-// 上一步
-nextBtn('art-btn-prev', "main-project", 'pro-next-button', 5);
-nextBtn('pri-btn-prev', "main-article", 'art-next-button', 6);
-
-// function nePrevBtn(element, arr) {
-//     var obj = document.getElementById(element);
-//     obj.onclick = function() {
-//         this.parentNode
-//     }
-// }
-function sameBtn(btn, j, thisFun, mainHea) {
-    function next(elem) {
-        do {
-            elem = elem.nextSibling;
-        } while (elem && elem.nodeType !== 1);
-        return elem;
-    }
-    for (var i = 0; i < mainHea.length; i++) {
-        var nextElem = next(mainHea[i]);
-        if (nextElem) {
-            nextElem.style.display = 'none';
-        }
-        mainHea[i].style.display = 'none';
-    }
-    thisFun.parentNode.style.display = 'none';
-    var proBtn = document.getElementsByClassName(btn)[0];
-    proBtn.style.display = 'flex';
-    return mainHea;
-}
-function nextBtn(element, nextEle, btn, j) {
-    var obj = document.getElementById(element);
-    obj.onclick = function () {
-        var mainHea = document.getElementById('pc-maincon').getElementsByTagName('h3');
-        sameBtn(btn, j, this, mainHea);
-        var mainPro = document.getElementById(nextEle);       
-        mainHea[j].style.display = 'block';
-        mainPro.style.display = 'block';
-        
-    }
-}
-
-prevBtnFir('pro-btn-prev','ca-next-button', 4);
-function prevBtnFir(element, btn, j) {
-    var obj = document.getElementById(element);
-    obj.onclick = function () {
-        var mainHea = document.getElementById('pc-maincon').getElementsByTagName('h3');
-    //     function next(elem) {
-    //         do {
-    //             elem = elem.nextSibling;
-    //         } while (elem && elem.nodeType !== 1);
-    //         return elem;
-    //     }
-    //     for (var i = 0; i < mainHea.length; i++) {
-    //         var nextElem = next(mainHea[i]);
-    //         if (nextElem) {
-    //             nextElem.style.display = 'none';
-    //         }
-    //         mainHea[i].style.display = 'none';
-    //     }
-    //     this.parentNode.style.display = 'none';
-    //     var proBtn = document.getElementsByClassName(btn)[0];
-        sameBtn(btn, j, this, mainHea)
-        for(var i = 0; i < j; i++) {
-            mainHea[i].style.display = 'block';
-            $("#pc-maincon>h3+div")[i].style.display = 'block';
-        }
-        // proBtn.style.display = 'flex';
-    }
-} */

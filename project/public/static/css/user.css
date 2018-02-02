@@ -37,12 +37,9 @@
 }
 
 .user-content .position {
-    /* position: absolute; */
     display: flex;
     justify-content: center;
     margin: 10px;
-    /* left: 50%;
-    transform: translateX(-50%); */
 }
 
 .user-content .position button {
@@ -74,4 +71,14 @@ footer {
     text-align: center;
     color: #fff;
     margin-top: 90px;
+}
+
+footer .copyright {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 489px) {
+    footer .copyright {
+        font-size: 10px;
+    }
 }

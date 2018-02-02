@@ -1,11 +1,10 @@
 // 基本信息
 // 出生时间
 // 保存图片的数据;
-// if (typeof (Storage) !== "undefined") {
+if (typeof (Storage) === "undefined") {
+    alert("您的浏览器不支持存储,建议您换其他浏览器！");
+}
 
-// } else {
-//     alert("xzzx");
-// }
 var imgData;
 
 var year = document.getElementById('year');
@@ -134,8 +133,6 @@ var personLogo = document.getElementById('person-logo');
 var personImg = document.getElementById('person-img');
 personLogo.onchange = function() {
     var imgFile = personLogo.files[0];
-    // var _this = this;
-    // console.log(this.value)
     if(imgFile) {
         // 限制图片2M左右
         if(parseInt(imgFile.size / 1024) < 2000) {
@@ -153,42 +150,9 @@ personLogo.onchange = function() {
                         return elem;
                     }
                     fr.onload = function () {
-                        // var img = new Image();
-                        // img.src = fr.result;
                         personImg.src = fr.result;
                         imgData = imgFile;
-                        // sessionStorage.setItem(_this.name, fr.result);
-                        // console.log(imgFile);
                     }
-                    // personImg.src = fr.result;
-                    /* fr.onload = function () {
-                        var img = new Image();
-                        img.src = fr.result;
-                      
-                        personImg.src = fr.result;
-                        var canvas, ctx, img64;
-        
-                        img.onload = function() {
-                            var max_width = 413;
-                            var img_w, img_h;
-                            if(img.width > max_width) {
-                                img_w = max_width;
-                                img_h = img.height * max_width / img.width;
-                            } else {
-                                img_w = img.width;
-                                img_h = img.height;
-                            }
-                            canvas = document.createElement('canvas');
-                            canvas.width = img_w;
-                            canvas.height = img_h;
-                            ctx = canvas.getContext("2d");
-                            ctx.drawImage(img, 0, 0, img_w, img_h);
-                            img64 = canvas.toDataURL(imgFile.type, 0.3);
-                            imgDate = img64;
-                            // console.log(img64);
-                        }
-                        
-                    }; */
                     personImg.style.display = 'block';
                     var nextElem = next(this);
                     if (nextElem) {

@@ -232,6 +232,16 @@ footer {
     margin-top: 70px;
 }
 
+footer .copyright {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 489px) {
+    footer .copyright {
+        font-size: 10px;
+    }
+}
+
 /* 移动端 */
 
 .ca-next-button,

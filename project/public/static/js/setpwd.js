@@ -14,7 +14,6 @@ for (i = 0; i < len; i++) {
                 var regEn = /^[a-zA-Z]+$/;
                 var regNum = /^[0-9]+$/;
                 var regChinese = /[\u4e00-\u9fa5]/gm;
-                // console.log(regChinese.test(this.value))
                 if (!reg.test(this.value) || regEn.test(this.value) || regNum.test(this.value) || regChinese.test(this.value)) {
                     span.innerHTML = '请输入6-16位且不能全数字或英文';
                     span.className = '';

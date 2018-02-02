@@ -12,7 +12,6 @@ function copyProject(obj1, obj2) {
     var num = row.length;
     if (num <= 5) {
         obj1.insertBefore(con, obj1.childNodes[num]);
-        // sessionStorage.setItem(obj1.id, num);
         var header = row[num - 1].getElementsByTagName('h4')[0];
         header.innerHTML = '项目' + project[num - 1];
 
@@ -37,9 +36,6 @@ function clickAddBlur(element, main) {
     var addPos = mainPos.getElementsByClassName('row')[0];
     obj.onclick = function () {
         copyProject(mainPos, addPos);
-        // for (var i = 0; i < valuesClass.length; i++) {
-        //     verifyForm(valuesClass[i]);
-        // }
     }
 }
 
@@ -77,16 +73,10 @@ $.get('', function(data) {
 
     for (var i = 0; i < information.length; i++) {
         sessionStorage.setItem(information[i], datas[information[i]]);
-        // datas[information[i]] = JSON.parse(sessionStorage.getItem(information[i]));
     }
 
     var getImg = document.getElementById('person-img');
     getImg.src = img;
-
-    
-    // for(var i = 0; i < addInformation[i].length; i++) {
-    //     sessionStorage.setItem(information[i], datas[information[i]]);
-    // }
 
     // 基本信息保存 id:pc-main-infor
 
@@ -148,7 +138,6 @@ $.get('', function(data) {
             } else if (input[i].type == 'file') {
                 if (imgData) {
                     n++;
-                    // console.log(imgData);
                 }
             }
         }
@@ -180,7 +169,6 @@ $.get('', function(data) {
                 contentType: false
             }).done(function (res) {
             }).fail(function (res) { });
-            // console.log(formData);
             $.ajax({
                 type: 'post',
                 url: '',
@@ -198,7 +186,7 @@ $.get('', function(data) {
                 }
             });
         } else {
-            alert('你还没有填完！');
+            alert('你还没有填完或者填写有误！');
         }
     }
 });
@@ -210,56 +198,18 @@ function save(ele) {
     if (!sessionStorage.getItem(ele)) {
         sessionStorage.setItem(ele, '{}');
     }
-
-    //  var datas = {};
     function getFormVal(formEle) {
-
-        // var data = JSON.parse(sessionStorage.getItem(ele)); 
-
         if ((formEle.getElementsByTagName('input')).length) {
             var obj = formEle.getElementsByTagName('input');
-            //  sessionStorage[ele] = {};
-            //  sessionStorage[ele]['names'] = 'name';
-            //  console.log(sessionStorage[ele]['names'])
-            //  var str = JSON.stringify(sessionStorage[ele]);
-            //  sessionStorage[ele].setItem(obj[0].name, obj[0].value);
-            // sessionStorage.getItem(ele) = new Object();
-
-            // var data = new Object();
-            /* var name = obj[0].name;
-            var value = obj[0].value; */
             var data = JSON.parse(sessionStorage.getItem(ele));
             var name = obj[0].name;
             if (data[name]) {
                 obj[0].value = data[name];
             }
-            //  if(sessionStorage.getItem(ele)) {
-
-            //      var name = obj[0].name;
-            //      obj[0].value = data[name];
-            //  }
-
-
-            /*  data[name] = value;
-             var str = JSON.stringify(data);
-             sessionStorage.setItem(ele, str); */
-
             // 失去焦点时
             obj[0].onblur = function () {
                 verifyForm(this, ele);
             }
-            //  console.log(JSON.parse(sessionStorage.getItem(ele)));
-            //  datas[name] = value;
-
-            //  datas.value = obj[0].value;
-            //  var str = JSON.stringify(datas);
-            //  for(var n = 0; n < sessionStorage.length; n++) {
-
-            // if(sessionStorage[ele] == ele) {
-            //  sessionStorage[ele]['name'] = obj[0].value;
-            //  console.log(sessionStorage[ele])
-            // }
-            //  }
         } else if (formEle.getElementsByTagName('select').length) {
             var obj = formEle.getElementsByTagName('select');
             var value = '';
@@ -274,7 +224,6 @@ function save(ele) {
                 var data = JSON.parse(sessionStorage.getItem(ele));
                 if (data[name]) {
                     var values = data[name];
-                    //  console.log(values.substring(0, 4));
                     var a = 4;
                     for (var n = 0; n < obj.length; n++) {
                         if (n === 0) {
@@ -306,34 +255,20 @@ function save(ele) {
                     verifyForm(this, ele);
                 }
             }
-            //  sessionStorage.setItem(ele, str);
-
-
         } else if (formEle.getElementsByTagName('textarea').length) {
             var obj = formEle.getElementsByTagName('textarea');
             for (var n = 0; n < obj.length; n++) {
                 var name = obj[n].name;
-                // var value = obj[n].value;
                 var data = JSON.parse(sessionStorage.getItem(ele));
-                //  data[name] = value;
                 if (data[name]) {
                     obj[n].value = data[name];
                 }
-                // var str = JSON.stringify(data);
-                // sessionStorage.setItem(ele, str);
                 obj[n].onblur = function () {
                     verifyForm(this, ele);
                 }
             }
 
         }
-        //  console.log(1)
-        //  var obj = formEle.getElementsByTagName('input') || formEle.getElementsByTagName('select');
-        //  console.log((formEle.getElementsByTagName('input')).length);
-        //  for(var m = 0; m < obj.length; m++) {
-        //      console.log(obj[m].value);
-        //     //  console.log(1);
-        //  }
     }
     function getValue(rowEle) {
         var form_group = rowEle.getElementsByClassName('form-group');
@@ -346,8 +281,6 @@ function save(ele) {
     for (var i = 0; i < row.length; i++) {
         getValue(row[i]);
     }
-    //  var str = JSON.stringify(datas);
-    //  sessionStorage.setItem(ele, str);
 }
 
 // 失去焦点
@@ -355,7 +288,6 @@ function save(ele) {
 function verifyForm(_this, main) {
     console.log(_this.type);
     if (_this.type == 'text' || _this.type == 'textarea') {
-        // console.log(_this.type == 'texterea')
         if (!_this.value) {
             $(_this).next()[0].innerHTML = '*未填写';
             $(_this).next()[0].className = '';
@@ -389,7 +321,6 @@ function verifyForm(_this, main) {
             if (!myreg.test(_this.value)) {
                 $(_this).next()[0].innerHTML = '*请填写正确的邮箱格式';
                 $(_this).next()[0].className = '';
-                // $(this).focus();
             } else {
                 $(_this).next()[0].innerHTML = '';
                 $(_this).next()[0].className = 'sr-only';
@@ -404,13 +335,10 @@ function verifyForm(_this, main) {
         }
     }
     else {
-        // 没有想到好的办法获取select
-        // console.log(1);
         var name = _this.name;
         var value = _this.value;
         var datas = JSON.parse(sessionStorage.getItem(main));
         datas[name] = value;
-        // console.log(datas);
         var str = JSON.stringify(datas);
         sessionStorage.setItem(main, str);
     }
@@ -431,99 +359,29 @@ function selectBlur(_this, main, num) {
 
     if (num == undefined) {
         datas[name] = value;
-        // console.log(datas);
-        //  var str = JSON.stringify(datas);
-        //  sessionStorage.setItem(main, str);
-        //  console.log(num);
     } else {
         datas[num][name] = value;
-        // console.log(value)
-        //  var str = JSON.stringify(datas);
-        //  sessionStorage.setItem(main, str);
     }
     var str = JSON.stringify(datas);
     sessionStorage.setItem(main, str);
 
 }
 
-
-// sessionStorage['pc-main-infor'].name;
-// console.log(JSON.parse(sessionStorage.getItem('pc-main-infor'))['name']);
-// console.log(sessionStorage['pc-main-infor']);
-
-// 图片
-// saveImg('pc-main-logo');
-// function saveImg(ele) {
-//     var obj = document.getElementById(ele);
-//     var input = obj.getElementsByTagName('input')[0];
-//     var img = obj.getElementsByTagName('img')[0];
-//     input.onblur = function() {
-//         if (imgData) {
-//             var fr = new FileReader();
-//             fr.readAsDataURL(imgData);
-//             console.log(imgData)
-//             fr.onload = function() {
-//                 console.log(fr.result)
-//                 img.src = fr.result;
-//             }
-
-//             // var fr = new FileReader();
-//             // fr.readAsDataURL(imgFile);
-//             // img.src = fr.result;
-//         }
-//     }
-// }
-// 从主持的项目开始为新增项
-
 function saveAdd(ele, bool) {
 
-
     function getFormVal(formEle, num) {
-        // var str = JSON.stringify(data);
-        // sessionStorage.setItem(ele, str);
         if ((formEle.getElementsByTagName('input')).length) {
             var obj = formEle.getElementsByTagName('input');
             for (var n = 0; n < obj.length; n++) {
                 var name = obj[n].name;
-                // var value = obj[n].value;
                 var dataIn = JSON.parse(sessionStorage.getItem(ele));
                 if (dataIn[num][name]) {
                     obj[n].value = dataIn[num][name];
-                } /* else {
-                    dataIn[num][name] = obj[n].value;
-                    var strIn = JSON.stringify(data);
-                    sessionStorage.setItem(ele, strIn);
-                } */
-                // dataIn[num][name] = value;
-
-                // var datas = {};
-                // console.log
-                // dataIn[name] = value;
-
-                // var strIn = JSON.stringify(dataIn);
-                // console.log(strIn);
-
-                // console.log(dataIn);
-                // dataIn[name] = value;
-
-                // // dataIn[num][name] = value;
-                // // dataLog = dataIn;
-                // // var strIn = JSON.stringify(dataIn);
-                // data[num][name] = value;
-                // var strIn = JSON.stringify(data);
-                // console.log(strIn);
-
-                // sessionStorage.setItem(ele, strIn);
+                } 
                 obj[n].onblur = function () {
                     addVerifyForm(this, ele, num);
                 }
-                // console.log(data);
             }
-
-
-            // data[name] = value;
-            // var str = JSON.stringify(data);
-            // sessionStorage.setItem(ele, str);
         } else if (formEle.getElementsByTagName('select').length) {
             var obj = formEle.getElementsByTagName('select');
             var value = '';
@@ -538,9 +396,7 @@ function saveAdd(ele, bool) {
                 }
                 if (dataIn[num][name]) {
                     var values = dataIn[num][name];
-                    //  console.log(values.substring(0, 4));
                     var a = 4;
-                    // console.log(values);
                     for (var n = 0; n < obj.length; n++) {
                         var values = dataIn[num][name];
                         switch (n) {
@@ -582,11 +438,6 @@ function saveAdd(ele, bool) {
                 }
 
             }
-
-            // data[name] = value;
-
-            // var str = JSON.stringify(data);
-            // sessionStorage.setItem(ele, str);
         }
     }
     function getValue(rowEle, num) {
@@ -714,7 +565,6 @@ function deleteAdd(ele) {
         var btn = $(spanBtn[i]).children('span')[0];
         btn.onclick = function () {
             var len = $(obj).children('.row').length;
-            // console.log(len)
             if (len > 2) {
                 var index = $(this).parent().index();
                 var data = JSON.parse(sessionStorage.getItem(ele));
@@ -732,7 +582,6 @@ function deleteAdd(ele) {
                     datas[n] = data[num];
                     n++;
                 }
-                // console.log(datas);
                 var str = JSON.stringify(datas);
                 sessionStorage.setItem(ele, str);
                 $(this).parent()[0].remove();
@@ -740,9 +589,7 @@ function deleteAdd(ele) {
                 for (var j = 0; j < row.length - 1; j++) {
                     $(row[j]).children('h4')[0].innerHTML = '项目' + project[j];
                 }
-                // saveAdd(ele);
             }
-
         }
     }
 }
