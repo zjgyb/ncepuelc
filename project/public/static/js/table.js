@@ -14,23 +14,19 @@ getAll.onclick = function() {
 function checkBox(name, ele) {
     var checkOrNot = ele.getElementsByTagName('input')[0];
     var trBtn = ele.getElementsByTagName('button')[0];
-    var trId = ele.getElementsByTagName('td')[1].innerHTML; 
-    checkOrNot.onchange = function() {           
+    checkOrNot.onchange = function() {
+        var trId = $(this).parent().next()[0].innerHTML;           
         if(this.checked) {
             if(sessionStorage.getItem(name)) {
                 var arrItem = sessionStorage.getItem(name);
-                var newArr = stringToArr(arrItem);
-                newArr[trId - 1] = trId; 
+                var newArr = stringToArr(arrItem, trId);
+                newArr.push(trId);
                 sessionStorage.setItem(name, newArr)
             } else {
-                var arr = new Array();
-                arr[trId-1] = trId;
+                var arr = [trId];
                 sessionStorage.setItem(name, arr);
-            }
-                     
-            
-        } else {
-            
+            }                
+        } else {    
             var data = sessionStorage.getItem(name);
             var newArr = stringToArr(data, trId);
             sessionStorage.setItem(name, newArr);
@@ -59,11 +55,8 @@ function stringToArr(arr, n) {
     var newArr = new Array();
     var i, len = tempArr.length;
     for(i = 0; i < len; i++) {
-        if(tempArr[i]) {
-            if (n != undefined && Number(tempArr[i]) == n) {
-            } else {
-                newArr.push(tempArr[i] * 1);
-            } 
+        if(tempArr[i] && Number(tempArr[i]) != n) {       
+           newArr.push(tempArr[i] * 1);
         }     
     }
     return newArr;
@@ -83,14 +76,15 @@ for(var i = 0; i < tableTr.length; i++) {
 var getPart = document.getElementById('getPart');
 getPart.onclick = function() {
     var aSrc = this.getElementsByTagName('a')[0];
-    var data = sessionStorage.getItem(table.id);
-    var arr = stringToArr(data);
-    if(arr.length) {
+    var datas = sessionStorage.getItem(table.id);
+    // var arr = stringToArr(data);
+    // console.log(data);
+    if(datas) {
         $.ajax({
             type: 'post',
             url: '',
             dataType: "json",
-            data: arr,
+            data: datas,
             success: function (data) {
                 aSrc.href = data.href;
             },
@@ -102,27 +96,6 @@ getPart.onclick = function() {
         alert('你还没有选择任何数据');
     }
    
-}
-
-// 搜索功能
-var search = document.getElementById('search');
-search.onclick = function() {
-    var content = document.getElementById('content');
-    var value = content.value;
-    if(value) {
-        $.ajax({
-            type: 'post',
-            url: '',
-            dataType: "json",
-            data: value,
-            success: function() {
-                
-            },
-            error: function(jqXHR) {
-                alert("发生错误：" + jqXHR.status);
-            }
-        })
-    }
 }
 
 // 删除table.id里的字符串
